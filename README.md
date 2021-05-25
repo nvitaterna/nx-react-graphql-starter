@@ -1,4 +1,4 @@
-
+[Walkthrough here](https://vitaterna.ca/using-apollo-prisma-and-nexus-with-react-in-an-nx-workspace)
 
 # TodoStarter
 
