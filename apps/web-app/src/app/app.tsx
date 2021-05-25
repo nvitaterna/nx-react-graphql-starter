@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { Message } from '@todo-starter/api-interfaces';
+import React from 'react';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { TodoItemForm, TodoItemList } from '@todo-starter/feature-todos';
+import './app.module.scss';
 
-export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
+const client = new ApolloClient({
+  uri: '/api/graphql',
+  cache: new InMemoryCache(),
+});
 
-  useEffect(() => {
-    fetch('/api')
-      .then((r) => r.json())
-      .then(setMessage);
-  }, []);
-
+const App = () => {
   return (
-    <>
-      <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to web-app!</h1>
-        <img
-          width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-          alt="Nx - Smart, Extensible Build Framework"
-        />
+    <ApolloProvider client={client}>
+      <h1>Todo Items</h1>
+      <div className="flex">
+        <TodoItemForm />
+        <TodoItemList />
       </div>
-      <div>{m.message}</div>
-    </>
+    </ApolloProvider>
   );
 };
 

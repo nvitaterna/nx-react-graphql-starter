@@ -3,16 +3,13 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
-    "types": [
-      "node",
-      "express",
-      "typegen-nexus-plugin-prisma"
-    ]
+    "types": ["jest", "node"]
   },
-  "exclude": [
-    "**/*.spec.ts"
-  ],
   "include": [
-    "**/*.ts"
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.spec.js",
+    "**/*.spec.jsx",
+    "**/*.d.ts"
   ]
 }

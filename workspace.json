@@ -138,7 +138,14 @@
             "outputPath": "dist/apps/api",
             "main": "apps/api/src/main.ts",
             "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
+            "assets": [
+              "apps/api/src/assets",
+              {
+                "glob": "*",
+                "input": "libs/prisma-client/prisma",
+                "output": "."
+              }
+            ]
           },
           "configurations": {
             "production": {
@@ -173,18 +180,89 @@
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
           }
+        },
+        "generate-gql": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "yarn ts-node --project ./tsconfig.base.json --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only apps/api/src/graphql/schema",
+            "outputPath": "apps/api/src/generated"
+          }
         }
       }
     },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
+    "prisma-client": {
+      "root": "libs/prisma-client",
+      "sourceRoot": "libs/prisma-client/src",
       "projectType": "library",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+            "lintFilePatterns": ["libs/prisma-client/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/prisma-client"],
+          "options": {
+            "jestConfig": "libs/prisma-client/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "generate-gql": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "yarn prisma generate",
+            "outputPath": "libs/prisma-client/src"
+          }
+        }
+      }
+    },
+    "data-access": {
+      "root": "libs/data-access",
+      "sourceRoot": "libs/data-access/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/data-access/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data-access"],
+          "options": {
+            "jestConfig": "libs/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "generate-gql": {
+          "executor": "@nrwl/workspace:run-commands",
+          "options": {
+            "command": "yarn graphql-codegen --config libs/data-access/codegen.yml",
+            "outputPath": "libs/data-access/src"
+          }
+        }
+      }
+    },
+    "feature-todos": {
+      "root": "libs/feature-todos",
+      "sourceRoot": "libs/feature-todos/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/feature-todos/**/*.{ts,tsx,js,jsx}"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/feature-todos"],
+          "options": {
+            "jestConfig": "libs/feature-todos/jest.config.js",
+            "passWithNoTests": true
           }
         }
       }

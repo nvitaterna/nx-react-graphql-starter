@@ -1,0 +1,15 @@
+query TodoItems {
+  todoItems {
+    id
+    text
+    done
+  }
+}
+
+mutation CreateOneTodoItem($text: String!, $done: Boolean = false) {
+  createOneTodoItem(data: { text: $text, done: $done }) {
+    id
+    text
+    done
+  }
+}

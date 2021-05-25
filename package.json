@@ -27,9 +27,15 @@
   },
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.3.19",
+    "@prisma/client": "^2.23.0",
+    "apollo-server-express": "^2.24.1",
     "core-js": "^3.6.5",
     "document-register-element": "1.13.1",
     "express": "4.17.1",
+    "graphql": "^15.5.0",
+    "nexus": "^1.0.0",
+    "nexus-plugin-prisma": "^0.35.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "regenerator-runtime": "0.13.7",
@@ -40,6 +46,9 @@
     "@babel/preset-env": "7.12.13",
     "@babel/preset-react": "7.12.13",
     "@babel/preset-typescript": "7.12.13",
+    "@graphql-codegen/cli": "^1.21.4",
+    "@graphql-codegen/typescript-operations": "^1.17.16",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.4",
     "@nrwl/cli": "12.3.4",
     "@nrwl/cypress": "12.3.4",
     "@nrwl/eslint-plugin-nx": "12.3.4",
@@ -71,8 +80,12 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "jest": "26.2.2",
     "prettier": "2.2.1",
+    "prisma": "^2.23.0",
     "ts-jest": "26.5.5",
-    "ts-node": "~9.1.1",
+    "ts-node": "^9.1.1",
     "typescript": "~4.2.4"
+  },
+  "prisma": {
+    "schema": "libs/prisma-client/prisma/schema.prisma"
   }
 }
